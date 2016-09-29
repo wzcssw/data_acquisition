@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  title: MyString
+  administrative: MyString
+  area: MyString
+  work_time: MyString
+  head: MyString
+  description: MyString
+
+two:
+  name: 
+  title: MyString
+  administrative: MyString
+  area: MyString
+  work_time: MyString
+  head: MyString
+  description: MyString

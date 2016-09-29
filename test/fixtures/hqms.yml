@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provinceId: 
+  hName: MyString
+  hGrade: MyString
+  hType: MyString
+
+two:
+  provinceId: 
+  hName: MyString
+  hGrade: MyString
+  hType: MyString
