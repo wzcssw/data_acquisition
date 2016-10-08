@@ -25,7 +25,7 @@ gem 'faraday-cookie_jar'  # 维持session
 # 处理得到的消息
 gem 'nokogiri'
 
-gem 'rmagick'
+# gem 'rmagick' 先注释掉，有可能和破解验证码有关
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

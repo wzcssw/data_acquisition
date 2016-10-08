@@ -117,7 +117,6 @@ GEM
     rake (10.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
-    rmagick (2.16.0)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -170,7 +169,6 @@ DEPENDENCIES
   net-http-persistent
   nokogiri
   rails (= 4.2.5)
-  rmagick
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
