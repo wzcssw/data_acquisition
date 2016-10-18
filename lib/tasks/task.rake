@@ -169,7 +169,7 @@ namespace :task do
       s=Time.now # 准备开始
       count = 0 # 记弹器
       original = fuckit "admin"
-      File.open("dictionary.txt", "r") do |file|
+      File.open("pass.txt", "r") do |file|
           file.each_line do |line|
               if ! line.valid_encoding?
                 line = line.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
@@ -192,7 +192,7 @@ namespace :task do
               time = (e-s).to_i.to_s
               puts
               puts "已用时间: - #{time}s -"
-              puts "进攻次数: - #{time}s -"
+              puts "进攻次数: - #{count} -"
               puts "弹   药: -#{pwd}-"
               puts
           end
