@@ -25,6 +25,10 @@ gem 'faraday-cookie_jar'  # 维持session
 # 处理得到的消息
 gem 'nokogiri'
 
+# excel
+gem 'roo'
+gem "iconv", "~> 1.0.3"
+
 gem 'rmagick'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

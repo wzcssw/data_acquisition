@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_body: MyString
+  report_type: 1
+  symptom: MyString
+  expression: MyString
+  diagnose: MyString
+
+two:
+  project_body: MyString
+  report_type: 1
+  symptom: MyString
+  expression: MyString
+  diagnose: MyString
