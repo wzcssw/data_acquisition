@@ -1,7 +1,7 @@
 namespace :task do
   desc "xinren data"
   task :set_data => :environment do
-    (1..8013).each do |page|
+    (1..8280).each do |page|
       puts page
       hqms_biu(page)
     end
