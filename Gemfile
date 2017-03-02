@@ -25,8 +25,6 @@ gem 'faraday-cookie_jar'  # 维持session
 # 处理得到的消息
 gem 'nokogiri'
 
-gem 'rmagick'
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
