@@ -1,8 +1,8 @@
 namespace :task do
     desc "haodaifu data"
     task :go => :environment do
-      # get_province
-      # get_hospital
+      get_province
+      get_hospital
       get_department
     end
 
