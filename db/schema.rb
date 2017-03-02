@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929032629) do
+ActiveRecord::Schema.define(version: 20170302064521) do
 
   create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
     t.string   "value",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "diagnostic_templates", force: :cascade do |t|
+    t.string  "project_body", limit: 255
+    t.integer "report_type",  limit: 4
+    t.string  "symptom",      limit: 255
+    t.text    "expression",   limit: 65535
+    t.string  "diagnose",     limit: 255
   end
 
   create_table "dic_hospitals", force: :cascade do |t|
@@ -38,6 +46,29 @@ ActiveRecord::Schema.define(version: 20160929032629) do
 
   create_table "foursomes", force: :cascade do |t|
     t.string "name", limit: 255
+  end
+
+  create_table "haodaifu_departments", force: :cascade do |t|
+    t.string "name",      limit: 255
+    t.string "url",       limit: 255
+    t.string "category",  limit: 255
+    t.string "h_type",    limit: 255
+    t.string "h_provice", limit: 255
+    t.string "h_area",    limit: 255
+    t.string "h_name",    limit: 255
+  end
+
+  create_table "haodaifu_hospitals", force: :cascade do |t|
+    t.string "name",    limit: 255
+    t.string "url",     limit: 255
+    t.string "h_area",  limit: 255
+    t.string "h_type",  limit: 255
+    t.string "h_grade", limit: 255
+  end
+
+  create_table "haodaifu_provinces", force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "url",  limit: 255
   end
 
   create_table "hqm_dic_compared", force: :cascade do |t|
@@ -77,6 +108,16 @@ ActiveRecord::Schema.define(version: 20160929032629) do
     t.string "url",  limit: 255
     t.string "alt",  limit: 255
     t.string "mark", limit: 255
+  end
+
+  create_table "vegetables", force: :cascade do |t|
+    t.string "name",      limit: 255
+    t.string "min_val",   limit: 255
+    t.string "ave_val",   limit: 255
+    t.string "max_val",   limit: 255
+    t.string "v_type",    limit: 255
+    t.string "unit",      limit: 255
+    t.string "send_date", limit: 255
   end
 
   create_table "xingrens", force: :cascade do |t|

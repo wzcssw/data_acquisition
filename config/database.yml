@@ -21,7 +21,7 @@ development:
   <<: *default
   database: data_acquisition_development
   username: root
-  password: hdwzc
+  password: wzc19931030
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
