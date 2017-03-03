@@ -3,7 +3,8 @@ namespace :task do
     task :go => :environment do
       # get_province
       # get_hospital
-      get_department
+      # get_department
+      get_doctor
     end
 
     def get_province # 获得省份信息
@@ -66,6 +67,70 @@ namespace :task do
             end
           end
         end
+      end
+    end
+
+    def get_doctor # 获得所有医生信息
+      HaodaifuDepartment.all.each do |hfd|
+        puts
+        puts
+        puts ">>>>>>>>>>>>>>>>>>>>>>  #{hfd.id}   <<<<<<<<<<<<<<<<<<<<<<<<<"
+        puts
+        puts
+        url = hfd.url.split('.com')[1]
+        str = get_page('http://www.haodf.com',url.split('.htm')[0] << '/menzhen_1.htm')
+        doc = Nokogiri::HTML(str)
+
+        page = 0
+        page_eles = doc.css(".p_text") # 取得页数
+        page_eles.each do |e|
+          if e.attributes['rel'].to_s.lstrip.rstrip == 'true'
+            s = e.content.to_s.lstrip.rstrip 
+            page = s.split("共")[1].split("页")[0].split(" ")[1].to_i
+          end
+        end
+
+        elements = doc.css(".name") # 本页
+        elements.each do |e|
+          puts '----------------------------------------------------------------------- 1'
+          puts e.content.to_s.lstrip.rstrip 
+          puts e.attributes['href'].to_s.lstrip.rstrip
+          grade = ''
+          if e.next_element.present?
+            if e.next_element.name == "p"
+              grade = e.next_element.content.to_s.lstrip.rstrip 
+            else
+              grade = e.next_element.next_element.content.to_s.lstrip.rstrip 
+            end
+          end
+          HaodaifuDoctor.create(doctor_name: e.content.to_s.lstrip.rstrip ,doctor_grade: grade,doctor_url: e.attributes['href'].to_s.lstrip.rstrip,
+                                department_name: hfd.name,department_category: hfd.category,
+                                hospital_provice: hfd.h_provice,hospital_area: hfd.h_area,hospital_name: hfd.h_name)
+        end
+
+        page.times do |x|  # 其他页面
+          next if (x+1)==1
+          str = get_page('http://www.haodf.com',url.split('.htm')[0] << "/menzhen_#{(x+1).to_s}.htm")
+          doc2 = Nokogiri::HTML(str)
+          elements2 = doc2.css(".name") # 本页
+          elements2.each do |e|
+            puts '----------------------------------------------------------------------- ' << (x+1).to_s
+            puts e.content.to_s.lstrip.rstrip 
+            puts e.attributes['href'].to_s.lstrip.rstrip
+            grade = ''
+            if e.next_element.present?
+              if e.next_element.name == "p"
+                grade = e.next_element.content.to_s.lstrip.rstrip 
+              else
+                grade = e.next_element.next_element.content.to_s.lstrip.rstrip 
+              end
+            end
+            HaodaifuDoctor.create(doctor_name: e.content.to_s.lstrip.rstrip ,doctor_grade: grade,doctor_url: e.attributes['href'].to_s.lstrip.rstrip,
+                                department_name: hfd.name,department_category: hfd.category,
+                                hospital_provice: hfd.h_provice,hospital_area: hfd.h_area,hospital_name: hfd.h_name)
+          end
+        end
+
       end
     end
 

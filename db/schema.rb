@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302064521) do
+ActiveRecord::Schema.define(version: 20170303074243) do
 
   create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
     t.string   "value",      limit: 255
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20170302064521) do
     t.string "h_provice", limit: 255
     t.string "h_area",    limit: 255
     t.string "h_name",    limit: 255
+  end
+
+  create_table "haodaifu_doctors", force: :cascade do |t|
+    t.string "doctor_name",         limit: 255
+    t.string "doctor_grade",        limit: 255
+    t.string "doctor_url",          limit: 255
+    t.string "department_name",     limit: 255
+    t.string "department_category", limit: 255
+    t.string "hospital_provice",    limit: 255
+    t.string "hospital_area",       limit: 255
+    t.string "hospital_name",       limit: 255
   end
 
   create_table "haodaifu_hospitals", force: :cascade do |t|
