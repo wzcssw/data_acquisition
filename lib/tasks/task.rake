@@ -71,7 +71,7 @@ namespace :task do
     end
 
     def get_doctor # 获得所有医生信息
-      HaodaifuDepartment.all.each do |hfd|
+      HaodaifuDepartment.where("id >= 16139").each do |hfd|
         puts
         puts
         puts ">>>>>>>>>>>>>>>>>>>>>>  #{hfd.id}   <<<<<<<<<<<<<<<<<<<<<<<<<"
